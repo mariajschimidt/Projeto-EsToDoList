@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EsToDoList</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJdZ2iM4i3c5NMD/nL6S0GzJ3e6/pGg+eA/9E+G3z2F3Lz9K6X5C8C8R8W7Zg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                'vivid-purple': '#8B5CF6', // Um roxo/lilás forte para o texto
+                'light-purple': '#DDD6FE', // Um roxo/lilás claro para os botões
+                'light-blue-box': '#BFDBFE', // Azul claro para as caixas laterais
+              }
+            }
+          }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex justify-center items-start p-6 md:p-10">
+    
+    <div class="max-w-6xl w-full flex flex-col md:flex-row gap-8 mt-4 md:mt-10">
+
+        <div class="flex-1 bg-white p-6 md:p-10 shadow-xl rounded-xl border border-gray-100">
+            <div class="text-sm text-gray-400 mb-6">DESKTOP</div>
+
+            <h1 class="text-4xl font-bold text-vivid-purple text-center mb-10">EsToDoList</h1>
+
+            <div class="flex items-center gap-3 mb-8">
+                <input type="text" placeholder="digite uma tarefa..." class="flex-grow p-3 rounded-lg border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-vivid-purple text-lg">
+                
+                <button class="bg-light-purple hover:bg-light-purple/80 transition text-vivid-purple w-12 h-12 rounded-lg shadow-md flex items-center justify-center">
+                    <i class="fas fa-plus fa-lg"></i>
+                </button>
+            </div>
+
+            <ul class="space-y-4">
+                <li class="flex items-center gap-3 p-3 border border-gray-200 rounded-lg shadow-sm">
+                    <input type="checkbox" id="task1" class="h-5 w-5 accent-vivid-purple">
+                    <p class="flex-grow text-gray-800 text-lg"># tarefa 1</p>
+                    <button class="text-gray-400 hover:text-yellow-500 p-1"><i class="fas fa-pencil-alt"></i></button>
+                    <button class="text-gray-400 hover:text-red-500 p-1"><i class="fas fa-trash-alt"></i></button>
+                </li>
+
+                <li class="flex items-center gap-3 p-3 border border-gray-200 rounded-lg shadow-sm">
+                    <input type="checkbox" id="task2" class="h-5 w-5 accent-vivid-purple">
+                    <p class="flex-grow text-gray-800 text-lg"># tarefa 2</p>
+                    <button class="text-gray-400 hover:text-yellow-500 p-1"><i class="fas fa-pencil-alt"></i></button>
+                    <button class="text-gray-400 hover:text-red-500 p-1"><i class="fas fa-trash-alt"></i></button>
+                </li>
+
+                <li class="flex items-center gap-3 p-3 border border-gray-200 rounded-lg shadow-sm">
+                    <input type="checkbox" id="task3" class="h-5 w-5 accent-vivid-purple">
+                    <p class="flex-grow text-gray-800 text-lg"># tarefa 3</p>
+                    <div class="w-6 h-6"></div> 
+                    <button class="text-gray-400 hover:text-red-500 p-1"><i class="fas fa-trash-alt"></i></button>
+                </li>
+            </ul>
+
+            <div class="mt-16"></div>
+
+            <div class="flex items-center gap-3">
+                <div class="flex-grow flex items-center border border-gray-300 rounded-lg shadow-sm overflow-hidden">
+                    <span class="px-3 text-gray-500"><i class="fas fa-search"></i></span>
+                    <input type="text" placeholder="Pesquise uma tarefa" class="p-3 w-full focus:outline-none text-lg">
+                </div>
+                
+                <button class="bg-light-purple hover:bg-light-purple/80 transition text-vivid-purple w-12 h-12 rounded-lg shadow-md flex items-center justify-center">
+                    <i class="fas fa-filter fa-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <aside class="w-full md:w-72 flex flex-col gap-5 pt-12 md:pt-24">
+            <div class="bg-light-blue-box p-5 rounded-xl shadow-md min-h-24"></div>
+            <div class="bg-light-blue-box p-5 rounded-xl shadow-md min-h-24"></div>
+            <div class="bg-light-blue-box p-5 rounded-xl shadow-md min-h-24"></div>
+        </aside>
+    </div>
+</body>
+</html>

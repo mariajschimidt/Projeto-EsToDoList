@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Document</title>
+</head>
+<body class = "flex justify-center items-start pt-12 min-h-screen
+ bg-gray-50 dark:bg-zinc-800 text-zinc-700 dark:text-pink-100">
+    <main 
+    class="w-full max-w-sm lg:max-w-lg p-6 bg-white dark:bg-zinc-600 border border-gray-300 rounded-lg shadow-xl">
+        <h1 class = "text-3xl font-bold text-center mb-6 text-pink-500"
+        style="font-family: 'Comic Sans MS'">EsToDoList</h1>
+        <div class = "flex mb-6 space-x-2">
+            <input type="text" 
+            id="nova-tarefa-input" 
+            placeholder="Digite uma tarefa aqui..."
+            class="flex-grow p-3 border border-gray-400 rounded-lg text-zinc-100 placeholder-gray-300 Focus:outline-none focus:ring-2 focus:border-pink-400">
+            <button 
+            id="adicionar-tarefa-btn"
+             class="flex-shrink-0 w-12 h-12 bg-pink-400 text-white font-bold rounded-lg hover:bg-pink-500 transition
+            duration-150 ease-in-out shadow-md">
+                +
+            </button>
+    </main>
+
+    
+</body>
+</html>

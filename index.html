@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EsToDoList</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <div class="flex flex-col md:w-1/2 md:m-auto gap-2 m-6 p-10 shadow-2xl rounded">
+<h1 class = "text-5xl text-blue-500 font-bold text-center"> EsToDoList</h1>
+<input type="text" placeholder="Digite uma tarefa aqui..."
+class="border border-blue-200 rounded p-2 w-full mt-8">
+<button
+class="bg-orange-300 text-white font-bold px-4 py-2 rounded mt-4 w-1/2 mx-auto"> 
+Adicionar
+</button>
+<ul class="space-y-2">
+  <li class="flex justify-between bg-gray-100 px-4 py-2 rounded">
+    <span class="text-xl text-gray-500 p-2 line-through">Estudar Biologia</span>
+    <button class="bg-gray-300 py-2 px-4 text-white rounded">X</button>
+  </li>
+</ul>
+<ul class="space-y-2">
+  <li class="flex justify-between bg-blue-100 px-4 py-2 rounded">
+    <span class="text-xl text-blue-500 p-2">Estudar Biologia</span>
+    <button class="bg-blue-300 py-2 px-4 text-white rounded">X</button>
+  </li>
+</ul>
+<ul class="space-y-2">
+  <li class="flex justify-between bg-blue-100 px-4 py-2 rounded">
+    <span class="text-xl text-blue-500 p-2">Estudar Biologia</span>
+    <button class="bg-blue-300 py-2 px-4 text-white rounded">X</button>
+  </li>
+</ul>
+</body>
+</html>
