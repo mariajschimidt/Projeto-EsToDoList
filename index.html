@@ -1,37 +1,227 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>EsToDoList</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
-    <div class="flex flex-col md:w-1/2 md:m-auto gap-2 m-6 p-10 shadow-2xl rounded">
-<h1 class = "text-5xl text-blue-500 font-bold text-center"> EsToDoList</h1>
-<input type="text" placeholder="Digite uma tarefa aqui..."
-class="border border-blue-200 rounded p-2 w-full mt-8">
-<button
-class="bg-orange-300 text-white font-bold px-4 py-2 rounded mt-4 w-1/2 mx-auto"> 
-Adicionar
-</button>
-<ul class="space-y-2">
-  <li class="flex justify-between bg-gray-100 px-4 py-2 rounded">
-    <span class="text-xl text-gray-500 p-2 line-through">Estudar Biologia</span>
-    <button class="bg-gray-300 py-2 px-4 text-white rounded">X</button>
-  </li>
-</ul>
-<ul class="space-y-2">
-  <li class="flex justify-between bg-blue-100 px-4 py-2 rounded">
-    <span class="text-xl text-blue-500 p-2">Estudar Biologia</span>
-    <button class="bg-blue-300 py-2 px-4 text-white rounded">X</button>
-  </li>
-</ul>
-<ul class="space-y-2">
-  <li class="flex justify-between bg-blue-100 px-4 py-2 rounded">
-    <span class="text-xl text-blue-500 p-2">Estudar Biologia</span>
-    <button class="bg-blue-300 py-2 px-4 text-white rounded">X</button>
-  </li>
-</ul>
+<body class="flex justify-center items-start pt-12 min-h-screen bg-gray-50 dark:bg-zinc-800 text-zinc-700 dark:text-white">
+    <main class="w-full max-w-sm lg:max-w-lg p-6 bg-white dark:bg-zinc-700 border border-gray-300 dark:border-zinc-600 rounded-lg shadow-xl">
+        
+        <h1 class="text-3xl font-bold text-center mb-6 text-indigo-700 dark:text-indigo-400">EsToDoList</h1>
+        
+        <div class="flex mb-6 space-x-2">
+            <input type="text" 
+                id="nova-tarefa-input" 
+                placeholder="Digite uma tarefa aqui..."
+                class="flex-grow p-3 border border-gray-400 dark:border-zinc-600 rounded-lg 
+                       text-zinc-900 dark:text-black placeholder-gray-400 dark:placeholder-zinc-400 
+                       focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            <button 
+                id="adicionar-tarefa-btn"
+                class="flex-shrink-0 w-12 h-12 bg-indigo-600 text-black text-xl font-bold rounded-lg hover:bg-indigo-700 transition duration-150 ease-in-out shadow-md">
+                +
+            </button>
+        </div>
+
+        <ul id="lista-de-tarefas" class="space-y-3">
+            </ul>
+
+        <hr class="my-6 border-indigo-200 dark:border-indigo-700">
+
+        <div class="flex space-x-2">
+            <input type="text" 
+                id="pesquisa-input"
+                placeholder="🔎 Pesquise uma tarefa"
+                class="flex-grow p-3 pl-5 border border-zinc-400 dark:border-zinc-600 rounded-lg 
+                       text-zinc-700 dark:text-black placeholder-zinc-400 dark:placeholder-zinc-400
+                       focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            >
+            <select id="filtro-select"
+                class="flex-shrink-0 p-3 border border-zinc-400 dark:border-zinc-600 rounded-lg 
+                       bg-white dark:bg-zinc-700 text-zinc-700 dark:text-white 
+                       focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <option value="todos">Todos</option>
+                <option value="ativos">Ativos</option>
+                <option value="concluidos">Concluídos</option>
+            </select>
+        </div>
+    </main>
+
+    <script>
+        // Elementos DOM
+        const novaTarefaInput = document.getElementById('nova-tarefa-input');
+        const adicionarTarefaBtn = document.getElementById('adicionar-tarefa-btn');
+        const listaDeTarefas = document.getElementById('lista-de-tarefas');
+        const pesquisaInput = document.getElementById('pesquisa-input');
+        const filtroSelect = document.getElementById('filtro-select');
+
+        // Array para armazenar as tarefas e salvá-las no Local Storage
+        let tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
+
+        function salvarTarefas() {
+            localStorage.setItem('tarefas', JSON.stringify(tarefas));
+        }
+
+        // Função para criar um elemento de tarefa com a nova estilização profissional
+        function criarElementoTarefa(tarefa) {
+            const li = document.createElement('li');
+            
+            // Estilos profissionais: hover em Indigo suave
+            li.className = 'flex justify-between items-center p-3 border border-gray-300 dark:border-zinc-600 rounded-lg hover:bg-indigo-50 dark:hover:bg-zinc-600 transition duration-150 ease-in-out';
+            li.dataset.id = tarefa.id;
+            
+            // Estilo para tarefa concluída: Fundo mais discreto (cinza claro) em vez de verde forte
+            if (tarefa.concluida) {
+                li.classList.add('bg-gray-100', 'dark:bg-zinc-600');
+            }
+
+            // Checkbox e Texto
+            const checkboxContainer = document.createElement('div');
+            checkboxContainer.className = 'flex items-center space-x-3';
+            
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.checked = tarefa.concluida;
+            // Checkbox: Cor Indigo
+            checkbox.className = 'w-5 h-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-600';
+            checkbox.addEventListener('change', () => alternarConclusao(tarefa.id));
+            
+            const span = document.createElement('span');
+            span.textContent = tarefa.texto;
+            span.className = tarefa.concluida 
+                ? 'line-through text-gray-500 dark:text-gray-400' 
+                : 'text-zinc-700 dark:text-white'; // Cor do texto atualizada
+            
+            checkboxContainer.appendChild(checkbox);
+            checkboxContainer.appendChild(span);
+            
+            // Botões de Ação
+            const div = document.createElement('div');
+            div.className = 'flex space-x-2';
+            
+            const editarBtn = document.createElement('button');
+            editarBtn.textContent = '✏';
+            // Botão Editar: Cor Indigo
+            editarBtn.className = 'text-indigo-600 hover:text-indigo-700'; 
+            editarBtn.addEventListener('click', () => editarTarefa(tarefa.id));
+            
+            const excluirBtn = document.createElement('button');
+            excluirBtn.textContent = '🗑';
+            // Botão Excluir: Cor Vermelha (Padrão profissional para exclusão)
+            excluirBtn.className = 'text-red-600 hover:text-red-700'; 
+            excluirBtn.addEventListener('click', () => excluirTarefa(tarefa.id));
+            
+            div.appendChild(editarBtn);
+            div.appendChild(excluirBtn);
+            
+            li.appendChild(checkboxContainer);
+            li.appendChild(div);
+            
+            return li;
+        }
+
+        // Funções de lógica de aplicação (renderizarTarefas, adicionarTarefa, excluirTarefa, alternarConclusao, editarTarefa)
+        // Estas funções são mantidas do seu arquivo feliz.html e apenas chamam a nova função criarElementoTarefa.
+
+        function renderizarTarefas() {
+            listaDeTarefas.innerHTML = '';
+            
+            const filtro = filtroSelect.value;
+            const termoPesquisa = pesquisaInput.value.toLowerCase();
+            
+            const tarefasFiltradas = tarefas.filter(tarefa => {
+                const correspondePesquisa = tarefa.texto.toLowerCase().includes(termoPesquisa);
+                
+                if (filtro === 'ativos') {
+                    return correspondePesquisa && !tarefa.concluida;
+                } else if (filtro === 'concluidos') {
+                    return correspondePesquisa && tarefa.concluida;
+                } else {
+                    return correspondePesquisa;
+                }
+            });
+            
+            if (tarefasFiltradas.length === 0) {
+                const li = document.createElement('li');
+                li.className = 'text-center p-3 text-gray-500';
+                li.textContent = 'Nenhuma tarefa encontrada.';
+                listaDeTarefas.appendChild(li);
+            } else {
+                tarefasFiltradas.forEach(tarefa => {
+                    listaDeTarefas.appendChild(criarElementoTarefa(tarefa));
+                });
+            }
+        }
+
+        function adicionarTarefa() {
+            const texto = novaTarefaInput.value.trim();
+            
+            if (texto === '') {
+                alert('Por favor, digite uma tarefa!');
+                return;
+            }
+            
+            const novaTarefa = {
+                id: Date.now(),
+                texto: texto,
+                concluida: false
+            };
+            
+            tarefas.push(novaTarefa);
+            salvarTarefas();
+            renderizarTarefas();
+            
+            novaTarefaInput.value = '';
+            novaTarefaInput.focus();
+        }
+
+        function excluirTarefa(id) {
+            if (confirm('Tem certeza que deseja excluir esta tarefa?')) {
+                tarefas = tarefas.filter(tarefa => tarefa.id !== id);
+                salvarTarefas();
+                renderizarTarefas();
+            }
+        }
+
+        function alternarConclusao(id) {
+            tarefas = tarefas.map(tarefa => {
+                if (tarefa.id === id) {
+                    return { ...tarefa, concluida: !tarefa.concluida };
+                }
+                return tarefa;
+            });
+            
+            salvarTarefas();
+            renderizarTarefas();
+        }
+
+        function editarTarefa(id) {
+            const tarefa = tarefas.find(t => t.id === id);
+            const novoTexto = prompt('Editar tarefa:', tarefa.texto);
+            
+            if (novoTexto !== null && novoTexto.trim() !== '') {
+                tarefa.texto = novoTexto.trim();
+                salvarTarefas();
+                renderizarTarefas();
+            }
+        }
+
+        // Event Listeners
+        adicionarTarefaBtn.addEventListener('click', adicionarTarefa);
+        
+        novaTarefaInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                adicionarTarefa();
+            }
+        });
+        
+        pesquisaInput.addEventListener('input', renderizarTarefas);
+        filtroSelect.addEventListener('change', renderizarTarefas);
+
+        // Renderizar tarefas ao carregar a página
+        renderizarTarefas();
+    </script>
 </body>
 </html>

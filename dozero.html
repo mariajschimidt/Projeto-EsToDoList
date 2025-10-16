@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>Document</title>
+    <title>EsToDoList</title>
 </head>
 <body class = "flex justify-center items-start pt-12 min-h-screen
  bg-gray-50 dark:bg-zinc-800 text-zinc-700 dark:text-pink-100">
@@ -23,6 +23,36 @@
             duration-150 ease-in-out shadow-md">
                 +
             </button>
+            </div>
+
+            <ul
+            id="lista-de-tarefas" class="space-y-3" >
+                <li class="flex justify-between items-center p-3 border border-gray-300 rounded-lg hover:bg-pink-600 transition duration-150 ease-in-out">
+                    <span>Tarefa 1</span>
+                    <div>
+                        <button>✏</button>
+                        <button>🗑</button>
+                    </div>
+                </li>
+            </ul>
+
+            <hr class= "my-6 border-pink-300">
+
+            <div class="flex-grow relative">
+                <input type="text" 
+                id="pesquisa-input"
+                placeholder="🔎Pesquise..."
+                class="flex-grow p-3 pl-5 border border-zinc-400 rounded-lg text-zinc-700 placeholder-zinc-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                <select name="" id="filtro-select"
+                class="p-3 border border-zinc-300 rounded-lg bg-white text-zinc-700 focus:outline-none focus:ring-2 focus:ring-pink-500">
+
+                <option value="todos">Todos</option>
+                <option value="ativos">Ativos</option>
+                <option value="concluidos">Concluidos</option>
+
+                </select>
+            </div>
     </main>
 
     
