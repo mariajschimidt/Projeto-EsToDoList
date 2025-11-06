@@ -1,11 +1,8 @@
-EsToDoList - Sistema de Gerenciamento de Tarefas
-Um aplicativo web responsivo de lista de tarefas (To-Do List) desenvolvido para praticar conceitos de desenvolvimento front-end com foco em Clean Code e padrões de programação.
-
 🚀 Sobre o Projeto
 O EsToDoList é uma aplicação front-end que permite aos usuários gerenciar suas tarefas diárias de forma eficiente. O projeto foi desenvolvido com o objetivo de praticar e demonstrar habilidades em desenvolvimento web moderno, seguindo princípios de código limpo e arquitetura bem estruturada.
 
-📩 Acesso ao Projeto
-Veja a aplicação rodando ao vivo: EsToDoList na Vercel
+🔗 Link do Projeto
+Você pode acessar e testar a aplicação diretamente aqui: **[https://projeto-es-to-do-list.vercel.app/](https://projeto-es-to-do-list.vercel.app/)**
 
 ✨ Funcionalidades
 ✅ Adicionar Tarefas: Insira novas tarefas através do campo de entrada
@@ -117,7 +114,7 @@ Feedback Visual: Estados de hover e transições suaves
 
 Ícones Intuitivos: Emojis para ações comuns
 
-Modo Escuro: Suporte completo a temas claro e escuro
+Tipografia: Fonte Comic Sans MS para aspecto descontraído
 
 📱 Compatibilidade
 ✅ Desktop (Windows, macOS, Linux)
@@ -134,6 +131,8 @@ Categorias ou tags para tarefas
 Datas de vencimento
 
 Prioridades (alta, média, baixa)
+
+Modo escuro/claro
 
 Sincronização com backend
 
