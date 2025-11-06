@@ -1,6 +1,9 @@
 🚀 Sobre o Projeto
 O EsToDoList é uma aplicação front-end que permite aos usuários gerenciar suas tarefas diárias de forma eficiente. O projeto foi desenvolvido com o objetivo de praticar e demonstrar habilidades em desenvolvimento web moderno, seguindo princípios de código limpo e arquitetura bem estruturada.
 
+📩 Acesso ao Projeto: 
+Veja a aplicação rodando ao vivo: [projeto-es-to-do-list]projeto-es-to-do-list.vercel.app
+
 ✨ Funcionalidades
 ✅ Adicionar Tarefas: Insira novas tarefas através do campo de entrada
 
